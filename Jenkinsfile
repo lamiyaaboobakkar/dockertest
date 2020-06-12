@@ -15,6 +15,13 @@ pipeline
     }
     stages  
     {
+        stage('Build preparations')
+        {
+            steps
+            {
+                checkout scm
+            }
+        }
         
         stage('Docker build')
         {
