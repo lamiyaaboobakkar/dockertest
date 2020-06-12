@@ -9,8 +9,8 @@ pipeline
     {
         VERSION = 'latest'
         PROJECT = 'training-api'
-        IMAGE = 'jenkins'
-        ECRURL = 'http://553812159679.dkr.ecr.ap-south-1.amazonaws.com'
+        IMAGE = 'jenkins-lamiya'
+        ECRURL = '553812159679.dkr.ecr.ap-south-1.amazonaws.com'
         ECRCRED = 'ecr:ap-south-1:ecr-credentials'
     }
     stages  
@@ -30,7 +30,7 @@ pipeline
                 script
                 {
                     // Build the docker image using a Dockerfile
-                    docker.build("jenkins")
+                    docker.build("jenkins-lamiya")
                 }
             }
         }
@@ -42,12 +42,12 @@ pipeline
                 script
                 {
                     //Get the ECR Login
-                    sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 553812159679.dkr.ecr.ap-south-1.amazonaws.com/jenkins'
+                    sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 553812159679.dkr.ecr.ap-south-1.amazonaws.com'
                     // Tag the Image
-                    sh 'docker tag jenkins:latest 553812159679.dkr.ecr.ap-south-1.amazonaws.com/jenkins:latest'
+                    sh 'docker tag jenkins-lamiya:latest 553812159679.dkr.ecr.ap-south-1.amazonaws.com/jenkins-lamiya:latest'
                     // Push the Docker image to ECR
                     echo "Push Docker Build to ECR"
-                    sh 'docker push 553812159679.dkr.ecr.ap-south-1.amazonaws.com/jenkins:latest'    
+                    sh 'docker push 553812159679.dkr.ecr.ap-south-1.amazonaws.com/jenkins-lamiya:latest'    
 
                 }
              }
