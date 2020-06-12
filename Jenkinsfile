@@ -37,7 +37,7 @@ pipeline
         stage('Docker push')
         {
             steps
-            { withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_cred', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
+            { withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'ecr-credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
              {
                 script
                 {
