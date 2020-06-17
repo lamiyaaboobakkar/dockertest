@@ -42,7 +42,7 @@ pipeline
                 script
                 {
                     //Get the ECR Login
-                    sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 553812159679.dkr.ecr.ap-south-1.amazonaws.com'
+                    sh ' sudo aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 553812159679.dkr.ecr.ap-south-1.amazonaws.com'
                     // Tag the Image
                     sh 'docker tag jenkins-demo:latest 553812159679.dkr.ecr.ap-south-1.amazonaws.com/jenkins-demo:latest'
                     // Push the Docker image to ECR
