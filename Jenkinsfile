@@ -9,8 +9,8 @@ pipeline
     {
         VERSION = 'latest'
         PROJECT = 'training-api'
-        IMAGE = 'jenkins-demo'
-        ECRURL = '553812159679.dkr.ecr.ap-south-1.amazonaws.com'
+        IMAGE = 'ecr-demo'
+        ECRURL = '553812159679.dkr.ecr.ap-south-1.amazonaws.com/ecr-demo'
         ECRCRED = 'ecr:ap-south-1:ecr-credentials'
     }
     stages  
@@ -30,7 +30,7 @@ pipeline
                 script
                 {
                     // Build the docker image using a Dockerfile
-                    docker.build("jenkins-demo")
+                    docker.build("ecr-demo")
                 }
             }
         }
@@ -42,12 +42,12 @@ pipeline
                 script
                 {
                     //Get the ECR Login
-                    sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 553812159679.dkr.ecr.ap-south-1.amazonaws.com'
+                    sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 553812159679.dkr.ecr.ap-south-1.amazonaws.com/ecr-demo'
                     // Tag the Image
-                    sh 'docker tag jenkins-demo:latest 553812159679.dkr.ecr.ap-south-1.amazonaws.com/jenkins-demo:latest'
+                    sh 'docker tag ecr-demo:latest 553812159679.dkr.ecr.ap-south-1.amazonaws.com/ecr-demo:latest'
                     // Push the Docker image to ECR
                     echo "Push Docker Build to ECR"
-                    sh 'docker push 553812159679.dkr.ecr.ap-south-1.amazonaws.com/jenkins-demo:latest'    
+                    sh 'docker push 553812159679.dkr.ecr.ap-south-1.amazonaws.com/ecr-demo:latest'    
 
                 }
              }
