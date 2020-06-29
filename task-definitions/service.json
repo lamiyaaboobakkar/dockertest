@@ -1,0 +1,16 @@
+[
+    {
+      "name": "terraformconatiner",
+      "image": "553812159679.dkr.ecr.ap-south-1.amazonaws.com/terraform",
+      "cpu": 512,
+      "memory": 512,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3008,
+          "hostPort": 80
+        }
+      ]
+    }
+   
+  ]
