@@ -9,8 +9,8 @@ pipeline
     {
         VERSION = 'latest'
         PROJECT = 'training-api'
-        IMAGE = 'ecr-demo'
-        ECRURL = '553812159679.dkr.ecr.ap-south-1.amazonaws.com/ecr-demo'
+        IMAGE = 'terraform'
+        ECRURL = '553812159679.dkr.ecr.ap-south-1.amazonaws.com/terraform'
         ECRCRED = 'ecr:ap-south-1:ecr-credentials'
     }
     stages  
@@ -30,7 +30,7 @@ pipeline
                 script
                 {
                     // Build the docker image using a Dockerfile
-                    docker.build("ecr-demo")
+                    docker.build("terraform")
                 }
             }
         }
@@ -42,12 +42,12 @@ pipeline
                 script
                 {
                     //Get the ECR Login
-                    sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 553812159679.dkr.ecr.ap-south-1.amazonaws.com/ecr-demo'
+                    sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 553812159679.dkr.ecr.ap-south-1.amazonaws.com'
                     // Tag the Image
-                    sh 'docker tag ecr-demo:latest 553812159679.dkr.ecr.ap-south-1.amazonaws.com/ecr-demo:latest'
+                    sh 'docker tag terraform:latest 553812159679.dkr.ecr.ap-south-1.amazonaws.com/terraform:latest'
                     // Push the Docker image to ECR
                     echo "Push Docker Build to ECR"
-                    sh 'docker push 553812159679.dkr.ecr.ap-south-1.amazonaws.com/ecr-demo:latest'    
+                    sh 'docker push 553812159679.dkr.ecr.ap-south-1.amazonaws.com/terraform:latest'    
 
                 }
              }
